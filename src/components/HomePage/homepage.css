@@ -1,0 +1,41 @@
+div.homepage-container {
+    padding: 0rem;
+}
+div.homepage-container h1{
+    font-weight: 900;
+}
+
+.footer-link {
+    color: darkslategrey;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.homepage-alert {
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    z-index: 100;
+    width: 50vw;
+}
+
+@media (min-width: 576px) {
+    div.homepage-container {
+        padding: 5rem;
+    }
+}
+@media (min-width: 768px) {
+    div.homepage-container {
+        padding: 0;
+    }
+}
+@media (min-width: 992px) {
+    
+}
+@media (min-width: 1200px) {
+    div.homepage-container {
+        padding: 7rem;
+    }
+}
+@media (min-width: 1400px) {
+}

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import API from "../api/API";
 
@@ -18,7 +17,7 @@ export const IsLoggedContextProvider = ({ children }) => {
     const requestUser = async (token) => {
         try {    
             document.getElementById('App').classList.add('loading')
-            const res = await axios.get("https://mern-lifebook-github.herokuapp.com/api/v1/auth/user",  {
+            const res = await API.get("/user",  {
                headers: {
                    'Content-Type': 'application/json',
                    'Athorization': `Bearer ${token}`

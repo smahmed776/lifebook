@@ -81,7 +81,10 @@ const Notification = ({ currentUser }) => {
                                     <p className="notification-para px-2 mb-0 pb-0">
                                     <span className={`${getIcon(i.react_type)}`}></span>
                                     <b> {i.buddy_name} </b>
-                                    has {i.react_type === "like" && "liked"}{i.react_type === 'comment' && 'commented on'} your
+                                    {i.buddy_id.length == 1 && `${i.buddy_id[0]} has `}
+                                    {i.buddy_id.length == 2 && `${i.buddy_id[0]} and ${i.buddy_id[1]} `} 
+                                    {i.buddy_id.length > 2 && `${i.buddy_id[0]}, ${i.buddy_id[1]} and ${i.buddy_id.length - 2} others `} 
+                                    {i.react_type === "like" && "liked"}{i.react_type === 'comment' && 'commented on'} your
                                     <Link to={`/post?id=${i.post_id}`} style={{ paddingLeft: ".5rem", textDecoration: "none" }}>Post</Link>
                                     </p>
                                     }
@@ -108,7 +111,10 @@ const Notification = ({ currentUser }) => {
                                     <p className="notification-para px-2 mb-0 pb-0">
                                     <span className={`${getIcon(i.react_type)}`}></span>
                                     <b> {i.buddy_name} </b>
-                                    has {i.react_type === "like" && "liked"}{i.react_type === 'comment' && 'commented on'} your
+                                    {i.buddy_id.length == 1 && `${i.buddy_id[0]} has `}  
+                                    {i.buddy_id.length == 2 && `${i.buddy_id[0]} and ${i.buddy_id[1]} `}  
+                                    {i.buddy_id.length > 2 && `${i.buddy_id[0]}, ${i.buddy_id[1]} and ${i.buddy_id.length - 2} others `} 
+                                    {i.react_type === "like" && "liked"}{i.react_type === 'comment' && 'commented on'} your
                                     <Link to={`/post?id=${i.post_id}`} style={{ paddingLeft: ".5rem", textDecoration: "none" }}>Post</Link>
                                     </p>
                                     }

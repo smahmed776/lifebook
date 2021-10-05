@@ -93,6 +93,7 @@ export const NotificationContextProvider = ({ children }) => {
             setGetNotification([
                 res.data
             ])
+            console.log(res.data);
         } catch (error) {
             
         }

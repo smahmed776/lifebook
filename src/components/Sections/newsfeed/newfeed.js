@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Moment from 'react-moment'
 import API from '../../../api/API';
 import { Link } from 'react-router-dom'
@@ -13,6 +13,8 @@ const NewsFeed = ({ currentUser }) => {
     const [isCreatedPost, setIsCreatedPost] = isCreatedPostState;
     const [posts] = postState;
     const [userPost, setUserPost] = useState("");
+    const createPostBtn = useRef(null);
+    const postSpinner = useRef(null)
     const [userImg, setUserImg] = useState("");
     const reverseArr = [...posts]
     reverseArr.reverse();
@@ -41,6 +43,8 @@ const NewsFeed = ({ currentUser }) => {
            alert("Please write something or upload a photo")
         } else {
             try {
+                createPostBtn.current.setAttribute('disabled', 'true');
+                postSpinner.current.classList.remove('d-none')
                 const body = {
                     _id: currentUser._id,
                     name: currentUser.name,
@@ -61,9 +65,12 @@ const NewsFeed = ({ currentUser }) => {
                 setUserPost('');
                 setUserImg('')
                 e.target.elements.imagepost.value= "";
-                window.location.replace('/')
+                createPostBtn.current.removeAttribute('disabled');
+                postSpinner.current.classList.add('d-none')
     
             } catch (error) {
+                createPostBtn.current.removeAttribute('disabled');
+                postSpinner.current.classList.add('d-none')
                 console.log(error);
             }
         }
@@ -125,7 +132,10 @@ const NewsFeed = ({ currentUser }) => {
 
 
                                                 <div className="col-12">
-                                                    <button type="submit" className="btn btn-primary w-100">Post</button>
+                                                    <button type="submit" ref={createPostBtn} className="btn btn-primary w-100">
+                                                        <span className="spinner-border spinner-border-sm me-2 d-none" ref={postSpinner}></span>
+                                                        Post
+                                                    </button>
                                                 </div>
 
                                             </div>
@@ -139,7 +149,7 @@ const NewsFeed = ({ currentUser }) => {
 
                 {reverseArr.length > 0 ?
                     reverseArr.map(i => (
-                        <GetPosts i={i} currentUser={currentUser} />
+                        <GetPosts i={i} currentUser={currentUser} setIsCreatedPost={setIsCreatedPost}/>
                     )
                     )
                     :

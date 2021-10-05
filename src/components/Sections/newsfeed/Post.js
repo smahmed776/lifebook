@@ -22,9 +22,13 @@ const Post = ({ currentUser }) => {
     const [setPostid] = postidState;
     const [newPostArr, setNewPostArr] = useState([]);
     const commentInp = useRef(null)
+    const placeholderPost = useRef(null);
+    const spinner = useRef(null)
 
     const requestPost = async (id) => {
         try {
+            spinner?.current.classList.remove('d-none')
+            placeholderPost.current.innerText = "Loading post..."
             const option = {
                 headers: {
                     "Content-Type": "application/json",
@@ -32,11 +36,12 @@ const Post = ({ currentUser }) => {
                 }
             }
             const res = await API.get('/post', option);
-            console.log(res);
             setPost([
                 res.data
             ])
         } catch (error) {
+            spinner.current.classList.add('d-none')
+            placeholderPost.current.innerText = "No Post Found!"
             console.log(error.response);
         }
     };
@@ -44,38 +49,46 @@ const Post = ({ currentUser }) => {
 
     const likePost = async (e) => {
         e.preventDefault();
+        const btn = document.getElementById(e.target.id)
         try {
+            btn.setAttribute('disabled', 'true')
             const option = {
                 headers: {
                     "Content-Type": "application/json",
-                    "Athorization": `Bearer ${e.target.id}`
+                    "Athorization": `Bearer ${e.target.dataset.postId}`
                 }
             }
             const res = await API.put('/likepost', { user_id: currentUser._id }, option);
             console.log(res)
-            window.location.reload();
+            requestPost(e.target.dataset.postId)
+            btn.removeAttribute('disabled')
 
 
         } catch (error) {
+            btn.removeAttribute('disabled')
             console.log(error);
         }
     }
 
     const unlikePost = async (e) => {
+        const btn = document.getElementById(e.target.id)
         e.preventDefault();
         try {
+            btn.setAttribute('disabled', 'true')
             const option = {
                 headers: {
                     "Content-Type": "application/json",
-                    "Athorization": `Bearer ${e.target.id}`
+                    "Athorization": `Bearer ${e.target.dataset.postId}`
                 }
             }
             const res = await API.put('/unlikepost', { user_id: currentUser._id }, option);
             console.log(res)
-            window.location.reload();
+            requestPost(e.target.dataset.postId)
+            btn.removeAttribute('disabled')
 
 
         } catch (error) {
+            btn.removeAttribute('disabled')
             console.log(error.response);
         }
     }
@@ -91,7 +104,7 @@ const Post = ({ currentUser }) => {
             }
 
             await API.delete("/deletepost", option);
-            
+
             window.location.replace('/');
 
         } catch (error) {
@@ -120,12 +133,15 @@ const Post = ({ currentUser }) => {
 
     const makeComment = async (e) => {
         e.preventDefault();
+        const btn = document.getElementById(e.target.dataset.btnId);
+        const spinner = document.getElementById(e.target.dataset.spinnerId);
         if (comment === '') {
             alert('Please write a comment')
             return false;
         }
         try {
-
+            btn.setAttribute('disabled', 'true');
+            spinner.classList.remove('d-none')
             const option = {
                 headers: {
                     "Content-Type": "application/json",
@@ -140,8 +156,12 @@ const Post = ({ currentUser }) => {
             await API.put("/comment", body, option);
             getComments(e.target.dataset.postId, "true");
             setComment('');
-
+            btn.removeAttribute('disabled');
+            spinner.classList.add('d-none')
+            
         } catch (error) {
+            btn.removeAttribute('disabled');
+            spinner.classList.add('d-none')
             console.log(error.response);
         }
     }
@@ -199,7 +219,7 @@ const Post = ({ currentUser }) => {
                                             <button className="btn text-white w-100 text-center bg-danger" data-bs-toggle="modal" data-bs-target={`#del${i._id}`}>Delete</button>
                                         </li>
                                         :
-                                       null
+                                        null
                                     }
 
                                 </ul>
@@ -225,9 +245,9 @@ const Post = ({ currentUser }) => {
 
                         <div className="d-flex justify-content-around postreact">
                             {i.reactions.likes.liker.find(t => (t === currentUser._id)) ?
-                                <button id={i._id} onClick={e => unlikePost(e)} className="btn text-primary" style={{ textDecoration: "none" }}><span className="bi bi-hand-thumbs-up-fill pe-2"></span> Liked</button>
+                                <button data-post-id={i._id} onClick={e => unlikePost(e)} id={`unlike${i._id}`} className="btn text-primary" style={{ textDecoration: "none" }}><span className="bi bi-hand-thumbs-up-fill pe-2"></span> Liked</button>
                                 :
-                                <button onClick={e => likePost(e)} id={i._id} className="btn text-dark" style={{ textDecoration: "none" }}><span className="bi bi-hand-thumbs-up pe-2"></span> Like</button>
+                                <button onClick={e => likePost(e)} id={`like${i._id}`} data-post-id={i._id} className="btn text-dark" style={{ textDecoration: "none" }}><span className="bi bi-hand-thumbs-up pe-2"></span> Like</button>
                             }
 
 
@@ -240,7 +260,7 @@ const Post = ({ currentUser }) => {
                         <hr className="mt-1 mb-2 m-sm-3" />
 
                     </div>
-                    <div className="comment px-3">
+                    <div className="comment px-3 mt-4">
                         {comments.length > 0 ?
                             comments[0].commentators.map(i => (
 
@@ -273,13 +293,16 @@ const Post = ({ currentUser }) => {
                             </div>
                         }
                         <div className="modal-footer justify-content-center">
-                            <form className="w-100" onSubmit={e => makeComment(e)} data-post-id={i._id}>
+                            <form className="w-100" onSubmit={e => makeComment(e)} data-btn-id={`commentbtn${i._id}`} data-spinner-id={`spinner${i._id}`} data-post-id={i._id}>
                                 <div className="row w-100">
                                     <div className="col-9">
                                         <input type="text" ref={commentInp} placeholder="write a comment..." className="form-control" value={comment} onChange={e => setComment(e.target.value)} />
                                     </div>
                                     <div className="col-3">
-                                        <button type="submit" className="btn btn-primary" >Comment</button>
+                                        <button type="submit" className="btn btn-md btn-primary " id={`commentbtn${i._id}`}>
+                                            <span className="spinner-border spinner-border-sm me-2 d-none" id={`spinner${i._id}`}></span>
+                                            Comment
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -354,7 +377,10 @@ const Post = ({ currentUser }) => {
             ))
                 :
                 <div className="col">
-                    <p>Post not found!</p>
+                    <p>
+                        <span className="spinner-border spinner-border-sm me-2" ref={spinner}></span>    
+                        <span ref={placeholderPost}>Loading post...</span>
+                    </p>
                 </div>
             }
         </div>

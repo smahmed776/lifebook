@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/lifebook/static/css/main.c1a823f4.chunk.css",
-    "main.js": "/lifebook/static/js/main.7538978f.chunk.js",
-    "main.js.map": "/lifebook/static/js/main.7538978f.chunk.js.map",
+    "main.css": "/lifebook/static/css/main.d4ecc0c7.chunk.css",
+    "main.js": "/lifebook/static/js/main.39a07401.chunk.js",
+    "main.js.map": "/lifebook/static/js/main.39a07401.chunk.js.map",
     "runtime-main.js": "/lifebook/static/js/runtime-main.3289b6e0.js",
     "runtime-main.js.map": "/lifebook/static/js/runtime-main.3289b6e0.js.map",
     "static/css/2.d8eb2712.chunk.css": "/lifebook/static/css/2.d8eb2712.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.9396cffa.chunk.js.map": "/lifebook/static/js/2.9396cffa.chunk.js.map",
     "index.html": "/lifebook/index.html",
     "static/css/2.d8eb2712.chunk.css.map": "/lifebook/static/css/2.d8eb2712.chunk.css.map",
-    "static/css/main.c1a823f4.chunk.css.map": "/lifebook/static/css/main.c1a823f4.chunk.css.map",
+    "static/css/main.d4ecc0c7.chunk.css.map": "/lifebook/static/css/main.d4ecc0c7.chunk.css.map",
     "static/js/2.9396cffa.chunk.js.LICENSE.txt": "/lifebook/static/js/2.9396cffa.chunk.js.LICENSE.txt",
     "static/media/bootstrap-icons.css": "/lifebook/static/media/bootstrap-icons.dfd0ea12.woff2"
   },
@@ -18,7 +18,7 @@
     "static/js/runtime-main.3289b6e0.js",
     "static/css/2.d8eb2712.chunk.css",
     "static/js/2.9396cffa.chunk.js",
-    "static/css/main.c1a823f4.chunk.css",
-    "static/js/main.7538978f.chunk.js"
+    "static/css/main.d4ecc0c7.chunk.css",
+    "static/js/main.39a07401.chunk.js"
   ]
 }

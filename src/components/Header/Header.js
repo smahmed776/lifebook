@@ -73,12 +73,90 @@ const Header = ({ currentUser }) => {
 
                         <ul className="navbar-nav justify-content-center me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link " to={`/profile?id=${currentUser._id}`}>
-                                    <img src={currentUser.image} className="d-inline rounded-pill" height="35px" width="35px" alt={currentUser.name} />
+                                <button className="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+
+                                        <Link className="nav-link" to={`/profile?id=${currentUser._id}`}>
+                                <div className="row m-0">
+                                    <div className="col-2 m-0 ">
+                                            <img src={currentUser.image} className="d-inline rounded-pill" height="35px" width="35px" alt={currentUser.name} />
+                                    </div>
+                                    <div className="col-10 m-0">
+
                                     <p className="d-inline text-dark ps-2">{currentUser.name}</p>
-                                </Link>
+                                    <p className="text-muted">See your profile</p>
+                                    </div>
+                                </div>
+                                        </Link>
+                                </button>
                             </li>
-                            <li className="nav-item rounded-pill border bg-light me-2 px-2">
+                            <hr />
+                            <div className="row row-cols-2 gx-3 gy-3 my-2 px-3">
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-bookmark"></span>
+                                        <p>Saved</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-collection"></span>
+                                        <p>Videos</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-flag"></span>
+                                        <p>Pages</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-shop"></span>
+                                        <p>Marketplace</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-people"></span>
+                                        <p>Groups</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-person"></span>
+                                        <p>Friends</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-calendar"></span>
+                                        <p>Events</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <Link to="#" className="text-dark" style={{textDecoration: "none"}}>
+                                    <div className="d-flex flex-column align-items-center bg-white border p-2">
+                                        <span className="bi bi-gear"></span>
+                                        <p>Settings</p>
+                                    </div>
+                                    </Link>
+                                </div>
+                            </div>
+                            {/* <li className="nav-item rounded-pill border bg-light me-2 px-2">
                                 <a className="nav-link active" href="#" aria-current="page" ><span className="bi bi-plus"></span></a>
                             </li>
                             <li className="nav-item rounded-pill border bg-light me-2 px-2">
@@ -94,9 +172,9 @@ const Header = ({ currentUser }) => {
                                 <ul class="dropdown-menu" aria-labelledby="profiledrop">
                                     <li><a class="dropdown-item" href="#">Action</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><button type="button" className="btn btn-danger dropdown-item" onClick={logout}> Log Out </button></li>
                                 </ul>
-                            </li>
+                            </li> */}
+                            <button type="button" className="btn btn-secondary w-100 " onClick={logout}> Log Out </button>
                         </ul>
 
                     </div>

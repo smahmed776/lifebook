@@ -83,18 +83,20 @@ const NewsFeed = ({ currentUser }) => {
         <section className="feed-container">
             <div className="row feedrow gy-2 gy-sm-4 px-0 px-sm-3 ps-lg-5">
                 <div className="col-12 bg-white rounded p-0 p-sm-2 mt-3 mt-sm-5 border">
-                    <div className="row gy-3 gy-sm-3 ps-0 ps-sm-5 pt-3 w-100 m-0 justify-content-center align-items-center pe-1 pe-sm-3">
-                        <div className="col-2 d-flex align-items-center justify-content-center ps-3 pe-0">
+                    <div className="row gy-3 gy-sm-3 p-0 ps-sm-5 pt-3 w-100 m-0 justify-content-center align-items-center pe-1 pe-sm-3">
+                        <div className="col-12 d-flex align-items-center justify-content-center pe-0 me-2">
+                            <div className="d-flex justify-content-evenly" style={{width: "85%"}}>
+
                             {currentUser.image ? <img src={currentUser.image} className="postimg rounded-pill" alt="" />
                                 : <span className="bi bi-person-circle ps-2" style={{ fontSize: "1.5rem" }}></span>}
-                        </div>
-                        <div className="col-10 pe-sm-5">
                             <div className="bg-light statuscol border">
                                 <form action="" className="h-100">
                                     <input type="text" data-bs-toggle="modal" data-bs-target="#createpost" placeholder={`What's on your mind, ${currentUser.name}?`} className="form-control statusinp bg-light" disabled />
                                 </form>
                             </div>
+                            </div>
                         </div>
+
                         <hr className="mb-1 w-75 w-sm-100" />
                         <div className="col-12">
                             <div className="d-flex justify-content-evenly align-items-center pb-3">

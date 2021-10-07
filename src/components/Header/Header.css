@@ -66,7 +66,7 @@
     font-size: 1rem!important;
 }
 .notification-para {
-    white-space: normal;
+    white-space: break-spaces;
     min-width: 250px;
 }
 /* .profilename {
@@ -77,7 +77,11 @@
 small screen  
 ============================================================================== */
 @media (min-width: 576px) {
-
+    
+    .notification-para {
+        white-space: normal;
+        min-width: 250px;
+    }
     #navbarSupportedContent li {
         height: 50px;
         width: 50px;

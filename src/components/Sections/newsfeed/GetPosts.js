@@ -171,8 +171,8 @@ const GetPosts = ({ i, currentUser, setIsCreatedPost }) => {
                     </div>
                 </div>
                 <div className="px-3">
-                    {i.post &&  <ShowMore text={i.post}
-                            length={170}
+                    {i.post && <p> <ShowMore text={i.post}
+                            length={270}
                             showMoreLabel=" See more"
                             showLessLabel=" See less"
                             tag="a"
@@ -184,7 +184,7 @@ const GetPosts = ({ i, currentUser, setIsCreatedPost }) => {
                               fontWeight: 'bold',
                               textDecoration: "none"
                             }}
-                            enabled />}
+                            enabled /></p>}
                     {i.image && <img src={i.image} alt={i.name} width="100%" className="px-2" style={{ objectFit: "contain" }} />}
                 </div>
 
@@ -194,7 +194,7 @@ const GetPosts = ({ i, currentUser, setIsCreatedPost }) => {
                         <span className="bi bi-hand-thumbs-up text-primary pe-2" style={{pointerEvents: "none"}}></span>{`${i.reactions.likes.liker.length}`}</a>
                     <div>
                         <a role="button" onClick={e => getComments(e.target.dataset.postId, "false")} data-post-id={i._id} data-bs-toggle="modal" data-bs-target={`#comment${i._id}`} className="text-muted" style={{ textDecoration: "none" }}>
-                            <span className="pe-0 pe-sm-2" style={{pointerEvents: "none"}}>{`${i.reactions.comments.commentators.length}`}</span> 
+                            <span className="pe-1 pe-sm-2" style={{pointerEvents: "none"}}>{`${i.reactions.comments.commentators.length}`}</span> 
                             Comment
                         </a>
                         <a href="" className="text-muted ms-2" style={{ textDecoration: "none" }}><span className="pe-0 pe-sm-1">1k</span> shares</a>

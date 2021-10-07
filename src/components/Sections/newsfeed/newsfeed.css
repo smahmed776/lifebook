@@ -13,12 +13,12 @@
 .postimg {
     height: 35px;
     width: 35px;
-    margin-left: .5rem;
+    margin-right: .5rem;
 }
 
 .statuscol {
 
-    width: 100%;
+    width: 85%;
     border-radius: 3.5rem;
     height: 35px;
     margin-left: .3rem;
@@ -68,7 +68,15 @@
     .postimg {
         height: 45px;
         width: 45px;
-        margin-left: .5rem;
+        margin-right: .5rem;
+    }
+    .statuscol {
+
+        width: 85%;
+        border-radius: 3.5rem;
+        height: 45px;
+        margin-left: .3rem;
+       
     }
 }
 /*=======================================================
@@ -90,14 +98,19 @@ lg large device
         height: 65px;
         width: 65px;
     }
+    .statuscol {
+
+        width: 85%;
+        border-radius: 3.5rem;
+        height: 65px;
+        margin-left: .3rem;
+       
+    }
     .statusimg {
         height: 55px;
         width: 55px;
     }
-    .statuscol {
-        width: 100%;
-        border-radius: 3.5rem;
-    }
+ 
 }
 
 
@@ -119,7 +132,7 @@ xl xtra large
         width: 90%;
     }
     .statuscol {
-        width: 100%;
+        width: 85%;
         border-radius: 3.5rem;
     }
     

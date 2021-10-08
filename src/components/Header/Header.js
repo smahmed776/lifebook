@@ -25,7 +25,7 @@ const Header = ({ currentUser }) => {
         <nav className="navbar navbar-expand-sm navbar-light bg-white sticky-top vw-100 border-bottom" id="navbar">
             <div className="container-fluid d-flex justify-content-between align-items-center px-3">
                 <div className="navbrand">
-                    <a className="navbar-brand me-1" href="/" > <img src="./freeLogo.jpeg" className="rounded-pill border" height="50px" width="50px" alt="lifebook" /> </a>
+                    <a className="navbar-brand me-1" href="/" > <img src="./freeLogo.jpg" className="rounded-pill border" height="50px" width="50px" alt="" /> </a>
                     <button className="btn rounded-pill bg-light navsearch border">
                         <form action="">
                             <button type="submit" className="bg-light bi bi-search navsearchbtn"></button>

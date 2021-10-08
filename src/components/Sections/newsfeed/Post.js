@@ -27,8 +27,8 @@ const Post = ({ currentUser }) => {
 
     const requestPost = async (id) => {
         try {
-            spinner?.current.classList.remove('d-none')
-            placeholderPost.current.innerText = "Loading post..."
+            if (spinner.current) { spinner.current.classList.remove('d-none') }
+            if (placeholderPost.current) { placeholderPost.current.innerText = "Loading post..." }
             const option = {
                 headers: {
                     "Content-Type": "application/json",
@@ -40,9 +40,9 @@ const Post = ({ currentUser }) => {
                 res.data
             ])
         } catch (error) {
-            spinner.current.classList.add('d-none')
-            placeholderPost.current.innerText = "No Post Found!"
-            console.log(error.response);
+            if (spinner.current) { spinner.current.classList.add('d-none') }
+            if (placeholderPost.current) { placeholderPost.current.innerText = "No Post Found!" }
+            console.log(error);
         }
     };
 
@@ -60,7 +60,10 @@ const Post = ({ currentUser }) => {
             }
             const res = await API.put('/likepost', { user_id: currentUser._id }, option);
             console.log(res)
+
+
             requestPost(e.target.dataset.postId)
+
             btn.removeAttribute('disabled')
 
 
@@ -158,7 +161,7 @@ const Post = ({ currentUser }) => {
             setComment('');
             btn.removeAttribute('disabled');
             spinner.classList.add('d-none')
-            
+
         } catch (error) {
             btn.removeAttribute('disabled');
             spinner.classList.add('d-none')
@@ -270,18 +273,26 @@ const Post = ({ currentUser }) => {
                                     <div className="col-12 d-flex flex-row justify-content-start">
                                         {comments[0].user[comments[0].user.findIndex(t => t._id === i.user_id)].image && <img src={comments[0].user[comments[0].user.findIndex(t => t._id === i.user_id)].image} alt="" className="rounded-pill" style={{ height: "35px", width: "35px" }} />}
                                         {!comments[0].user[comments[0].user.findIndex(t => t._id === i.user_id)].image && <span className="bi bi-person-circle" style={{ fontSize: '1.5rem' }}></span>}
-                                        <div className="ms-3 px-2 bg-light rounded">
-                                            <Link role="button" to={`/profile?id=${i.user_id}`} target="_blank" style={{ textDecoration: "none", fontWeight: "bold" }} className="text-dark">
+                                        <div className="ms-3 px-2 rounded">
+                                            <div className="bg-light p-2 rounded">
 
-                                                {comments[0].user[comments[0].user.findIndex(t => t._id === i.user_id)].name}
+                                                <Link role="button" to={`/profile?id=${i.user_id}`} target="_blank" style={{ textDecoration: "none", fontWeight: "bold" }} className="text-dark">
 
-                                            </Link>
-                                            <p>{i.comment}</p>
+                                                    {comments[0].user[comments[0].user.findIndex(t => t._id === i.user_id)].name}
+
+                                                </Link>
+                                                <p>{i.comment}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="col-12 ">
-                                        <p className="text-muted text-end"><Moment fromNow interval={1000}>{i.time}</Moment></p>
-                                    </div>
+                                            <div className="col-12 d-flex justify-content-start" style={{fontSize: ".75rem"}}>
+                                                <div className="d-flex justify-content-evenly align-items-center" style={{minWidth: "226px"}}>
+
+                                                <p className="text-muted text-start p-0 m-0"><Moment fromNow interval={1000}>{i.time}</Moment></p>
+                                                <button className="btn" style={{fontSize: ".75rem"}} href="#">like</button>
+                                                <button className="btn" style={{fontSize: ".75rem"}} href="#">delete</button>
+                                                </div>
+                                            </div>
                                 </div>
 
                             ))
@@ -378,7 +389,7 @@ const Post = ({ currentUser }) => {
                 :
                 <div className="col">
                     <p>
-                        <span className="spinner-border spinner-border-sm me-2" ref={spinner}></span>    
+                        <span className="spinner-border spinner-border-sm me-2" ref={spinner}></span>
                         <span ref={placeholderPost}>Loading post...</span>
                     </p>
                 </div>

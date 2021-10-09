@@ -14,14 +14,14 @@
 	left: 50%;
 	top: 50%;
 	z-index: 1;
-	width: 120px;
-	height: 120px;
+	width: 100px;
+	height: 100px;
 	margin: -76px 0 0 -76px;
-	border: 16px solid #f3f3f3;
+	border: 9px solid #a2a2a2;
 	border-radius: 50%;
-	border-top: 16px solid #3498db;
-	-webkit-animation: spin 2s linear infinite;
-	animation: spin 2s linear infinite;
+	border-top: 9px solid #27343d;
+	-webkit-animation: spin .8s linear infinite;
+	animation: spin .8s linear infinite;
 	
 }
 #App.min-height {

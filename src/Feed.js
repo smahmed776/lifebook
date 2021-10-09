@@ -9,7 +9,7 @@ import RightSideBar from './components/Sections/rightsidebar/rightsidebar'
 
 const Feed = ({ currentUser }) => {
     return (
-        <div className="bg-light">
+        <div className="" style={{backgroundColor: "#f0f2f5"}}>
             <Header currentUser={currentUser} />
             <Switch>
                 <Route exact path="/">

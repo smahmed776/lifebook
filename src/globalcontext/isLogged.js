@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import API from "../api/API";
 
@@ -81,27 +82,56 @@ export const NotificationContextProvider = ({ children }) => {
     const [getNotification, setGetNotification] = useState([])
     const { loggeduserState } = useContext(IsLoggedContext)
     const [ loggeduser ] = loggeduserState;
-    const requestNotification = async () => {
-        try {
-            const res = await API.get("/notification",  {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Athorization': `Bearer ${loggeduser[0]._id}`
-                }
-             });
 
+    const getOneNotification = async () => {
+        try {
+            const res = await API.post("/graphql", JSON.stringify({
+                query : `
+                query {
+                    getOneNotification (id: ${JSON.stringify(loggeduser[0]._id)}) {
+                        read {
+                            time
+                            post_id
+                            buddy_id
+                            react_type
+                            reacted_user {
+                                name
+                                id
+                            }
+                            message
+                        }
+                        unread {
+                            time
+                            post_id
+                            react_type
+                            buddy_id 
+                            reacted_user{
+                                name
+                                id
+                            }
+                            message
+                        }
+                        
+                    }
+                }
+                `
+            }), {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
             setGetNotification([
-                res.data
+                res.data.data.getOneNotification
             ])
-            console.log(res.data);
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
     useEffect(()=>{
         if(loggeduser.length > 0){
-            requestNotification();
+
+            getOneNotification()
         }
     }, [loggeduser])
 

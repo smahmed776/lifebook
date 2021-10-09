@@ -42,7 +42,7 @@ const Notification = ({ currentUser }) => {
 
     useEffect(()=> {
         if(getNotification.length > 0){
-          let arr =  [...getNotification[0]?.getuserNotification.reacts.read]
+          let arr =  [...getNotification[0]?.read]
           arr.reverse()
           setReverseNotif([
               ...arr,
@@ -52,7 +52,7 @@ const Notification = ({ currentUser }) => {
 
     useEffect(() => {
 
-        setNotificationCount(getNotification[0]?.getuserNotification.reacts.unread.length)
+        setNotificationCount(getNotification[0]?.unread.length)
     }, [getNotification])
 
     return (
@@ -71,7 +71,7 @@ const Notification = ({ currentUser }) => {
             </div> : null}
             <ul className="dropdown-menu notify-dropdown px-2" aria-aria-labelledby="notificationdrop">
                 {
-                    getNotification[0]?.getuserNotification.reacts.unread.length > 0 ? getNotification[0].getuserNotification.reacts.unread.map(i => (
+                    getNotification[0]?.unread.length > 0 ? getNotification[0].unread.map(i => (
                         <li className="dropdown-item border-bottom bg-light">
                             <div className="d-flex flex-column">
                                 <div className="mt-2">
@@ -81,9 +81,9 @@ const Notification = ({ currentUser }) => {
                                     <p className="notification-para px-2 mb-0 pb-0">
                                     <span className={`${getIcon(i.react_type)}`}></span>
                                     <b> {i.buddy_name} </b>
-                                    {i.buddy_id.length == 1 && `${i.buddy_id[0]} has `}
-                                    {i.buddy_id.length == 2 && `${i.buddy_id[0]} and ${i.buddy_id[1]} `} 
-                                    {i.buddy_id.length > 2 && `${i.buddy_id[0]}, ${i.buddy_id[1]} and ${i.buddy_id.length - 2} others `} 
+                                    {i.buddy_id.length == 1 && `${i.reacted_user[0].name} has `}
+                                    {i.buddy_id.length == 2 && `${i.reacted_user[0].name} and ${i.reacted_user[1].name} `} 
+                                    {i.reacted_user.length > 2 && `${i.reacted_user[0].name}, ${i.reacted_user[1].name} and ${i.reacted_user.length - 2} others `} 
                                     {i.react_type === "like" && "liked"}{i.react_type === 'comment' && 'commented on'} your
                                     <Link to={`/post?id=${i.post_id}`} style={{ paddingLeft: ".5rem", textDecoration: "none" }}>Post</Link>
                                     </p>
@@ -111,9 +111,9 @@ const Notification = ({ currentUser }) => {
                                     <p className="notification-para px-2 mb-0 pb-0">
                                     <span className={`${getIcon(i.react_type)}`}></span>
                                     <b> {i.buddy_name} </b>
-                                    {i.buddy_id.length == 1 && `${i.buddy_id[0]} has `}  
-                                    {i.buddy_id.length == 2 && `${i.buddy_id[0]} and ${i.buddy_id[1]} `}  
-                                    {i.buddy_id.length > 2 && `${i.buddy_id[0]}, ${i.buddy_id[1]} and ${i.buddy_id.length - 2} others `} 
+                                    {i.reacted_user.length == 1 && `${i.reacted_user[0].name} has `}  
+                                    {i.reacted_user.length == 2 && `${i.reacted_user[0].name} and ${i.reacted_user[1].name} `}  
+                                    {i.reacted_user.length > 2 && `${i.reacted_user[0].name}, ${i.reacted_user[1].name} and ${i.reacted_user.length - 2} others `} 
                                     {i.react_type === "like" && "liked"}{i.react_type === 'comment' && 'commented on'} your
                                     <Link to={`/post?id=${i.post_id}`} style={{ paddingLeft: ".5rem", textDecoration: "none" }}>Post</Link>
                                     </p>

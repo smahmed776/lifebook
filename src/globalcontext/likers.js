@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import API from "../api/API";
 
@@ -10,6 +11,8 @@ export const LikerContextProvider = ({ children }) => {
     const [ reqtype, setreqType ] = useState("");
     const [postid, setPostid] = useState('');
     const [newComment, setNewComment] = useState(false)
+
+    
 
     const getLiker = async (postid, type) => {
         
